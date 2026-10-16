@@ -1,64 +1,28 @@
-.header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+header {
+  border-bottom: 1px solid #ddd;
 }
 
-.header-inner {
+.bar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 64px;
+  align-items: center;
+  height: 56px;
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: var(--text);
+  font-weight: bold;
+  font-size: 20px;
   text-decoration: none;
 }
 
-.logo {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: var(--primary);
-  color: #fff;
-}
-
-.nav {
-  display: flex;
-  gap: 0.25rem;
-}
-
-.nav a {
-  padding: 0.45rem 0.8rem;
-  border-radius: 8px;
-  color: var(--muted);
+nav a {
+  margin-left: 16px;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
+  color: #666;
 }
 
-.nav a:hover {
-  color: var(--text);
-}
-
-.nav a.active {
-  background: var(--primary-soft);
-  color: var(--primary);
-}
-
-@media (max-width: 480px) {
-  .brand span:last-child {
-    display: none;
-  }
+/* classe ajoutée par routerLinkActive */
+nav a.active {
+  color: #111;
+  text-decoration: underline;
 }

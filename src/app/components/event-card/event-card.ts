@@ -10,12 +10,14 @@ import { EventItem } from '../../models/event-item';
   styleUrl: './event-card.css',
 })
 export class EventCard {
+  // données reçues du parent (EventList)
   event = input.required<EventItem>();
   isFavorite = input(false);
 
-  favoriteToggled = output<number>();
+  // événement envoyé au parent avec l'id de l'événement
+  favoriteClicked = output<number>();
 
-  onToggleFavorite() {
-    this.favoriteToggled.emit(this.event().id);
+  onFavoriteClick() {
+    this.favoriteClicked.emit(this.event().id);
   }
 }

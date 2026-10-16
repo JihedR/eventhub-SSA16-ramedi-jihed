@@ -5,13 +5,12 @@ import { NotFound } from './pages/not-found/not-found';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
-  { path: 'events', component: EventList, title: 'EventHub | Événements' },
-  { path: 'events/:id', component: EventDetails, title: 'EventHub | Détails' },
+  { path: 'events', component: EventList },
+  { path: 'events/:id', component: EventDetails },
   {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
-    title: 'EventHub | À propos',
   },
-  // doit rester en dernier
-  { path: '**', component: NotFound, title: 'EventHub | Page introuvable' },
+  // wildcard : doit rester en dernier
+  { path: '**', component: NotFound },
 ];

@@ -1,39 +1,25 @@
-<article class="card" [class.active]="isFavorite()">
-  <div class="media">
-    <img [src]="event().imageUrl" [alt]="event().title" />
-    <span class="category">{{ event().category | uppercase }}</span>
-  </div>
+<div class="card" [class.active]="isFavorite()">
+  <img [src]="event().imageUrl" [alt]="event().title" />
 
-  <div class="body">
+  <div class="content">
+    <p class="category">{{ event().category | uppercase }}</p>
     <h3>{{ event().title }}</h3>
-
-    <p class="meta">
-      <span>📅 {{ event().date | date: 'EEE d MMM yyyy' }}</span>
-      <span>📍 {{ event().place }}</span>
-    </p>
+    <p>{{ event().date | date: 'dd/MM/yyyy' }} · {{ event().place }}</p>
 
     @if (event().price === 0) {
-      <span class="price free">Gratuit</span>
+      <p>Gratuit</p>
     } @else {
-      <span class="price">{{ event().price | currency: 'TND' : 'symbol-narrow' : '1.0-0' }}</span>
+      <p>{{ event().price | currency: 'TND' : 'symbol' : '1.0-0' }}</p>
     }
 
-    <div class="actions">
-      <a class="btn" [routerLink]="['/events', event().id]">Voir les détails</a>
+    <a [routerLink]="['/events', event().id]">Voir les détails</a>
 
-      <button
-        type="button"
-        class="btn fav-btn"
-        [class.is-fav]="isFavorite()"
-        (click)="onToggleFavorite()"
-        [attr.aria-pressed]="isFavorite()"
-      >
-        @if (isFavorite()) {
-          ♥ Retirer des favoris
-        } @else {
-          ♡ Ajouter aux favoris
-        }
-      </button>
-    </div>
+    <button (click)="onFavoriteClick()">
+      @if (isFavorite()) {
+        Retirer des favoris
+      } @else {
+        Ajouter aux favoris
+      }
+    </button>
   </div>
-</article>
+</div>

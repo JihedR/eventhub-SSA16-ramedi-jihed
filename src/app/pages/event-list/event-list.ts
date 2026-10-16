@@ -11,34 +11,36 @@ import { EVENTS } from '../../data/events.data';
 })
 export class EventList {
   events = signal<EventItem[]>(EVENTS);
-  favoriteIds = signal<number[]>([]);
-  favoritesCount = computed(() => this.favoriteIds().length);
 
-  selectedCategory = signal<string>('Tous');
+  // ids des événements en favori
+  favorites = signal<number[]>([]);
+  favoritesCount = computed(() => this.favorites().length);
+
   categories = ['Tous', 'Atelier', 'Conférence', 'Compétition', 'Rencontre'];
+  selectedCategory = signal('Tous');
 
+  // liste affichée selon la catégorie choisie
   filteredEvents = computed(() => {
-    const category = this.selectedCategory();
-    const all = this.events();
-    return category === 'Tous' ? all : all.filter((e) => e.category === category);
+    if (this.selectedCategory() === 'Tous') {
+      return this.events();
+    }
+    return this.events().filter((e) => e.category === this.selectedCategory());
   });
 
   selectCategory(category: string) {
     this.selectedCategory.set(category);
   }
 
-  isFavorite(id: number): boolean {
-    return this.favoriteIds().includes(id);
+  isFavorite(id: number) {
+    return this.favorites().includes(id);
   }
 
+  // appelée quand une carte émet favoriteClicked
   toggleFavorite(id: number) {
-    // nouveau tableau sinon le signal ne voit pas le changement
-    this.favoriteIds.update((ids) =>
-      ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id],
-    );
-  }
-
-  clearFavorites() {
-    this.favoriteIds.set([]);
+    if (this.isFavorite(id)) {
+      this.favorites.update((list) => list.filter((x) => x !== id));
+    } else {
+      this.favorites.update((list) => [...list, id]);
+    }
   }
 }

@@ -1,14 +1,11 @@
-import {
-  ApplicationConfig,
-  LOCALE_ID,
-  provideBrowserGlobalErrorListeners,
-} from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
 import { routes } from './app.routes';
 
+// dates et prix affichés en français par les pipes
 registerLocaleData(localeFr);
 
 export const appConfig: ApplicationConfig = {
