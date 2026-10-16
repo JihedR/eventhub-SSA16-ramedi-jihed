@@ -9,7 +9,7 @@ données).
 
 **Auteur :** Jihed Ramedi
 
-## Versions
+## Versions utilisées
 
 - Angular 21.2
 - Angular CLI 21.2
