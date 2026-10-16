@@ -1,0 +1,41 @@
+<a routerLink="/events" class="back">← Retour aux événements</a>
+
+@if (event(); as ev) {
+  <article class="details">
+    <img [src]="ev.imageUrl" [alt]="ev.title" class="cover" />
+
+    <div class="content">
+      <span class="category">{{ ev.category | uppercase }}</span>
+      <h1>{{ ev.title }}</h1>
+
+      <dl class="info">
+        <div>
+          <dt>Date</dt>
+          <dd>{{ ev.date | date: 'EEEE d MMMM yyyy' }}</dd>
+        </div>
+        <div>
+          <dt>Lieu</dt>
+          <dd>{{ ev.place }}</dd>
+        </div>
+        <div>
+          <dt>Prix</dt>
+          <dd>
+            @if (ev.price === 0) {
+              <span class="free">Gratuit</span>
+            } @else {
+              {{ ev.price | currency: 'TND' : 'symbol-narrow' : '1.0-0' }}
+            }
+          </dd>
+        </div>
+      </dl>
+
+      <p class="description">{{ ev.description }}</p>
+    </div>
+  </article>
+} @else {
+  <div class="not-found">
+    <h1>Événement introuvable</h1>
+    <p>Aucun événement ne correspond à l'identifiant « {{ id() }} ».</p>
+    <a routerLink="/events" class="btn btn-primary">Voir tous les événements</a>
+  </div>
+}

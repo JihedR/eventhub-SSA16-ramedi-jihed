@@ -1,0 +1,24 @@
+.box {
+  text-align: center;
+  padding: 3.5rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.code {
+  margin: 0;
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+h1 {
+  margin: 0.5rem 0;
+}
+
+p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
