@@ -21,8 +21,8 @@ Projet 100 % côté client : les données sont définies dans le code TypeScript
 ## Installation et lancement
 
 ```bash
-git clone URL_DU_DEPOT
-cd eventhub-jihed-ramedi
+git clone https://github.com/JihedR/eventhub-SSA16-ramedi-jihed.git
+cd eventhub-SSA16-ramedi-jihed
 npm install
 ng serve --open
 ```
