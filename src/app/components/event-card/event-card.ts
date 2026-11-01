@@ -16,8 +16,14 @@ export class EventCard {
 
   // événement envoyé au parent avec l'id de l'événement
   favoriteClicked = output<number>();
+  deleteClicked = output<number>();
 
   onFavoriteClick() {
     this.favoriteClicked.emit(this.event().id);
+  }
+
+  // la suppression est faite par le parent (avec confirmation)
+  onDeleteClick() {
+    this.deleteClicked.emit(this.event().id);
   }
 }

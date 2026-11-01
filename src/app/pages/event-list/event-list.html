@@ -1,5 +1,10 @@
 <h1>Événements</h1>
-<p>Favoris : {{ favoritesCount() }}</p>
+
+<div class="counters">
+  <p>Total : {{ eventCount() }}</p>
+  <p>Favoris : {{ favoriteCount() }}</p>
+  <p>Gratuits : {{ freeEventCount() }}</p>
+</div>
 
 <div class="filters">
   @for (category of categories; track category) {
@@ -15,6 +20,7 @@
       [event]="event"
       [isFavorite]="isFavorite(event.id)"
       (favoriteClicked)="toggleFavorite($event)"
+      (deleteClicked)="deleteEvent($event)"
     />
   } @empty {
     <p>Aucun événement disponible</p>

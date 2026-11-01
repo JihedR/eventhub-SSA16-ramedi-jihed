@@ -35,3 +35,9 @@ button {
   display: block;
   width: 100%;
 }
+
+.delete {
+  margin-top: 8px;
+  border-color: #999;
+  color: #666;
+}

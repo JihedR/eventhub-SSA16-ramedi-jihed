@@ -1,7 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { EventCard } from '../../components/event-card/event-card';
-import { EventItem } from '../../models/event-item';
-import { EVENTS } from '../../data/events.data';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-event-list',
@@ -10,13 +9,15 @@ import { EVENTS } from '../../data/events.data';
   styleUrl: './event-list.css',
 })
 export class EventList {
-  events = signal<EventItem[]>(EVENTS);
+  private eventService = inject(EventService);
 
-  // ids des événements en favori
-  favorites = signal<number[]>([]);
-  favoritesCount = computed(() => this.favorites().length);
+  // données et compteurs lus depuis le service
+  events = this.eventService.events;
+  eventCount = this.eventService.eventCount;
+  favoriteCount = this.eventService.favoriteCount;
+  freeEventCount = this.eventService.freeEventCount;
 
-  categories = ['Tous', 'Atelier', 'Conférence', 'Compétition', 'Rencontre'];
+  categories = ['Tous', 'Atelier', 'Conférence', 'Compétition', 'Sport'];
   selectedCategory = signal('Tous');
 
   // liste affichée selon la catégorie choisie
@@ -32,15 +33,18 @@ export class EventList {
   }
 
   isFavorite(id: number) {
-    return this.favorites().includes(id);
+    return this.eventService.isFavorite(id);
   }
 
   // appelée quand une carte émet favoriteClicked
   toggleFavorite(id: number) {
-    if (this.isFavorite(id)) {
-      this.favorites.update((list) => list.filter((x) => x !== id));
-    } else {
-      this.favorites.update((list) => [...list, id]);
+    this.eventService.toggleFavorite(id);
+  }
+
+  // appelée quand une carte émet deleteClicked
+  deleteEvent(id: number) {
+    if (confirm('Supprimer cet événement ?')) {
+      this.eventService.deleteEvent(id);
     }
   }
 }

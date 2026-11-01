@@ -2,6 +2,16 @@ h1 {
   margin-top: 0;
 }
 
+.counters {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+.counters p {
+  margin: 0;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
