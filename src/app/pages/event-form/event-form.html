@@ -1,0 +1,75 @@
+<h1>Ajouter un événement</h1>
+
+<form [formGroup]="eventForm" (ngSubmit)="addEvent()">
+  <label for="title">Titre</label>
+  <input id="title" type="text" formControlName="title" />
+  @if (eventForm.controls.title.invalid && eventForm.controls.title.touched) {
+    @if (eventForm.controls.title.hasError('required')) {
+      <p class="error">Le titre est obligatoire.</p>
+    } @else if (eventForm.controls.title.hasError('minlength')) {
+      <p class="error">Le titre doit contenir au moins 5 caractères.</p>
+    } @else if (eventForm.controls.title.hasError('maxlength')) {
+      <p class="error">Le titre ne doit pas dépasser 50 caractères.</p>
+    }
+  }
+
+  <label for="category">Catégorie</label>
+  <select id="category" formControlName="category">
+    <option value="" disabled>Choisir une catégorie</option>
+    @for (category of categories; track category) {
+      <option [value]="category">{{ category }}</option>
+    }
+  </select>
+  @if (eventForm.controls.category.invalid && eventForm.controls.category.touched) {
+    <p class="error">La catégorie est obligatoire.</p>
+  }
+
+  <label for="date">Date</label>
+  <input id="date" type="date" formControlName="date" />
+  @if (eventForm.controls.date.invalid && eventForm.controls.date.touched) {
+    <p class="error">La date est obligatoire.</p>
+  }
+
+  <label for="place">Lieu</label>
+  <input id="place" type="text" formControlName="place" />
+  @if (eventForm.controls.place.invalid && eventForm.controls.place.touched) {
+    @if (eventForm.controls.place.hasError('required')) {
+      <p class="error">Le lieu est obligatoire.</p>
+    } @else {
+      <p class="error">Le lieu doit contenir au moins 3 caractères.</p>
+    }
+  }
+
+  <label for="price">Prix (TND)</label>
+  <input id="price" type="number" formControlName="price" />
+  @if (eventForm.controls.price.invalid && eventForm.controls.price.touched) {
+    @if (eventForm.controls.price.hasError('required')) {
+      <p class="error">Le prix est obligatoire (0 si gratuit).</p>
+    } @else {
+      <p class="error">Le prix doit être supérieur ou égal à 0.</p>
+    }
+  }
+
+  <label for="imageUrl">URL de l'image (facultatif)</label>
+  <input id="imageUrl" type="text" formControlName="imageUrl" />
+
+  <label for="description">Description</label>
+  <textarea id="description" rows="4" formControlName="description"></textarea>
+  @if (eventForm.controls.description.invalid && eventForm.controls.description.touched) {
+    @if (eventForm.controls.description.hasError('required')) {
+      <p class="error">La description est obligatoire.</p>
+    } @else {
+      <p class="error">La description doit contenir au moins 20 caractères.</p>
+    }
+  }
+
+  <button type="submit" [disabled]="eventForm.invalid">Ajouter</button>
+</form>
+
+<section class="debug">
+  <h2>Suivi du formulaire</h2>
+  <p>
+    Statut : <strong>{{ formStatus() }}</strong>
+  </p>
+  <pre>{{ formValue() | json }}</pre>
+</section>
